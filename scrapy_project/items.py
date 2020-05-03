@@ -14,3 +14,11 @@ class QuotesItem(scrapy.Item):
     text = scrapy.Field()
     author = scrapy.Field()
     tags = scrapy.Field()
+
+class ImdbItem(scrapy.Item):
+    title = scrapy.Field()
+    duration = scrapy.Field()
+    genre = scrapy.Field()
+    imdb_rating = scrapy.Field()
+    metascore_rating = scrapy.Field()
+    votes = scrapy.Field()
