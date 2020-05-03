@@ -29,7 +29,7 @@ class ImdbSpiderSpider(scrapy.Spider):
 
         sleep(randint(2, 5))
 
-        next_page = response.xpath('//div[@class="desc"]/a/@href').extract_first()
+        next_page = response.xpath('//div[@class="desc"]/a[@class="lister-page-next next-page"]/@href').extract_first()
 
         if next_page:
             yield scrapy.Request(response.urljoin(next_page))
