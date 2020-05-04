@@ -8,6 +8,8 @@ class ImdbSpiderSpider(scrapy.Spider):
     allowed_domains = ['www.imdb.com']
     start_urls = ['https://www.imdb.com/search/title/?release_date=2019-01-01,&sort=num_votes,desc']
 
+    page_count = 0
+
     def parse(self, response):
         all_movies = response.xpath('//div[@class="lister-item mode-advanced"]')
         for movie in all_movies:
@@ -30,6 +32,6 @@ class ImdbSpiderSpider(scrapy.Spider):
         sleep(randint(2, 5))
 
         next_page = response.xpath('//div[@class="desc"]/a[@class="lister-page-next next-page"]/@href').extract_first()
-
-        if next_page:
+        self.page_count += 1
+        if next_page and self.page_count < 40:
             yield scrapy.Request(response.urljoin(next_page))
